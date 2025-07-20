@@ -4,7 +4,8 @@ import "context"
 
 type SendEmail struct {
 	Subject string `json:"subject"`
-	Body    string `json:"body"`
+	Message string `json:"message"`
+	Mail    string `json:"email"`
 }
 
 type EmailUseCase interface {

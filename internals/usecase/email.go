@@ -24,13 +24,14 @@ func (m *EmailUseCaseImpl) SendEmail(ctx context.Context, req *core.SendEmail) e
 	if req == nil {
 		return core.ReqBodyNotPresent
 	}
-	if req.Subject == "" || req.Body == "" {
+	if req.Subject == "" || req.Message == "" || req.Mail == "" {
 		return core.InvalidRequestBody
 	}
 
 	emailReq := &email.MailPayLoad{
 		Subject: req.Subject,
-		Body:    req.Body,
+		Body:    req.Message,
+		Mail:    req.Mail,
 	}
 
 	err := m.mailSvc.SendMail(ctx, emailReq)

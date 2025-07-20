@@ -12,6 +12,7 @@ import (
 type MailPayLoad struct {
 	Subject string `json:"subject"`
 	Body    string `json:"body"`
+	Mail string `json:"email"`
 }
 
 type Mail struct {
@@ -40,6 +41,8 @@ func (m *Mail) SendMail(ctx context.Context, req *MailPayLoad) error {
 	if err != nil {
 		return err
 	}
+
+	req.Body=fmt.Sprintf("%s || FROM : %s",req.Body,req.Mail)
 
 	// Create a new message
 	message := mail.NewMessage()

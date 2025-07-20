@@ -11,13 +11,13 @@ func SetUpRoutes(eh *handlers.Handler) *gin.Engine {
 	// Initialize a new Gin router
 	router := gin.Default()
 
-	// Configure CORS middleware
-	config := cors.DefaultConfig()
-	config.AllowOrigins = []string{"http://localhost:5173", "https://navneetdev.netlify.app/"} // Add your frontend URLs
-	config.AllowMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
-	config.AllowHeaders = []string{"Origin", "Content-Type", "Authorization"}
-	config.AllowCredentials = true
-	config.MaxAge = 12 * 60 * 60 // Cache CORS preflight for 12 hours
+	config := cors.Config{
+		AllowOrigins:     []string{"http://localhost:5173", "https://navneetdev.netlify.app"},
+		AllowMethods:     []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"},
+		AllowHeaders:     []string{"Origin", "Content-Type", "Authorization"},
+		AllowCredentials: true,
+		MaxAge:           12 * 60 * 60,
+	}
 
 	// Apply CORS middleware to the router
 	router.Use(cors.New(config))
