@@ -39,9 +39,10 @@ func LoadConfig(configPath string) (conf *Config, err error) {
 		conf.EmailConfig.SMTP_PORT = os.Getenv("SMTP_PORT")
 
 		// Validate
-		if conf.DBConfig.DATABASE == "" || conf.DBConfig.DB_HOST == "" {
-			return nil, fmt.Errorf("missing database env variables")
-		}
+		// uncomment when deploying database
+		// if conf.DBConfig.DATABASE == "" || conf.DBConfig.DB_HOST == "" {
+		// 	return nil, fmt.Errorf("missing database env variables")
+		// }
 
 		return conf, nil
 	} else if env == EnvDev.ToString() { // Environment variable for dev server
