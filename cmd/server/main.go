@@ -8,17 +8,15 @@ import (
 	routes "portfolio/internals/interface"
 	"portfolio/internals/interface/api/rest/handlers"
 	"portfolio/internals/usecase"
-
-	"github.com/joho/godotenv"
 )
 
 func main() {
 	// Load env
-	err := godotenv.Load(".env")
-	if err != nil {
-		log.Println("error in loading .env ",err)
-		return
-	}
+	// err := godotenv.Load(".env")
+	// if err != nil {
+	// 	log.Println("error in loading .env ",err)
+	// 	return
+	// }
 
 	port := os.Getenv("PORT")
 	if port == "" {
