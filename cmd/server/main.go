@@ -8,6 +8,7 @@ import (
 	routes "portfolio/internals/interface"
 	"portfolio/internals/interface/api/rest/handlers"
 	"portfolio/internals/usecase"
+	"time"
 )
 
 func main() {
@@ -32,6 +33,19 @@ func main() {
 	emailSvc := email.NewMailSvc(conf)
 	emailUseCase := usecase.NewEmailUseCase(conf, emailSvc)
 	emailhandler := handlers.NewHandler(emailUseCase)
+
+	// Start cron job in background
+	go func() {
+		log.Println("I am fine") // Print immediately on start
+
+		ticker := time.NewTicker(14*time.Minute + 30*time.Second)
+		defer ticker.Stop()
+
+		for {
+			<-ticker.C
+			log.Println("I am fine")
+		}
+	}()
 
 	router := routes.SetUpRoutes(&emailhandler)
 	err = router.Run(":" + port)
